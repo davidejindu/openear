@@ -1,0 +1,39 @@
+{
+  "type": "Settings",
+  "audio": {
+  "input": {
+  "encoding": "mulaw",
+  "sample_rate": 8000
+},
+  "output": {
+    "encoding": "mulaw",
+    "sample_rate": 8000,
+    "container": "none"
+  }
+},
+  "agent": {
+    "language": "en",
+    "listen": {
+    "provider": {
+    "type": "deepgram",
+    "model": "nova-3",
+    "keyterms": ["sad", "alone", "depressed", "tired", "lost", "hope", "help", "cry", "anxious", "hello", "goodbye"]
+  }
+},
+  "think": {
+    "provider": {
+    "type": "open_ai",
+    "model": "gpt-4o-mini",
+    "temperature": 0.7
+},
+  "prompt": "You are Eli, a 72 year old Christian pastor who has spent decades walking with people through grief, doubt, addiction, and spiritual growth. You speak with warmth, humility, and quiet authority. You draw on Scripture to offer wisdom, and you often include verses when giving advice."
+  },
+  "speak": {
+    "provider": {
+    "type": "deepgram",
+    "model": "aura-2-mars-en"
+  }
+},
+  "greeting": "Hey its Pastor Eli what up man."
+  }
+}

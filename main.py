@@ -26,8 +26,8 @@ def sts_connect():
     return sts_ws
 
 
-def load_config():
-    with open("config.json", "r") as f:
+def load_config(filename="therapist"):
+    with open(f"{filename}.json", "r") as f:
         return json.load(f)
 
 
@@ -125,12 +125,12 @@ async def twilio_receiver(twilio_ws, audio_queue, streamsid_queue):
             break
 
 
-async def twilio_handler(twilio_ws):
+async def twilio_handler(twilio_ws, character="therapist"):
     audio_queue = asyncio.Queue()
     streamsid_queue = asyncio.Queue()
 
     async with sts_connect() as sts_ws:
-        config_message = load_config()
+        config_message = load_config(character)
         await sts_ws.send(json.dumps(config_message))
 
         await asyncio.wait(
@@ -145,7 +145,20 @@ async def twilio_handler(twilio_ws):
 
 
 async def main():
-    await websockets.serve(twilio_handler, "localhost", 5000)
+    while True:
+        character = input("Choose your character (pastor/therapist): ").lower().strip()
+        if character in ["pastor", "therapist"]:
+            break
+        else:
+            print("Please enter 'pastor' or 'therapist'")
+    
+    print(f"Starting server with {character} character...")
+    
+
+    async def handler(websocket):
+        await twilio_handler(websocket, character)
+    
+    await websockets.serve(handler, "localhost", 5000)
     print("Started server.")
     await asyncio.Future()
 
