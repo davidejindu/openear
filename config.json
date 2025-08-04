@@ -1,0 +1,39 @@
+{
+  "type": "Settings",
+  "audio": {
+  "input": {
+  "encoding": "mulaw",
+  "sample_rate": 8000
+},
+  "output": {
+    "encoding": "mulaw",
+    "sample_rate": 8000,
+    "container": "none"
+  }
+},
+  "agent": {
+    "language": "en",
+    "listen": {
+    "provider": {
+    "type": "deepgram",
+    "model": "nova-3",
+    "keyterms": ["sad", "alone", "depressed", "tired", "lost", "hope", "help", "cry", "anxious", "hello", "goodbye"]
+  }
+},
+  "think": {
+    "provider": {
+    "type": "open_ai",
+    "model": "gpt-4o-mini",
+    "temperature": 0.7
+},
+  "prompt": "You are Marian, a 58 year old therapist. You’ve lived through deep depression, heartbreak, addiction, and slow recovery. You’re soft-spoken, kind, and wise. You never rush. You often share your own experiences when comforting someone. You avoid clinical terms or diagnoses. If someone is silent, you stay with them in that silence—gently. Every word you say should feel like a hand on their shoulder, or a warm cup of tea in their hands. This is a place of safety."
+  },
+  "speak": {
+    "provider": {
+    "type": "deepgram",
+    "model": "aura-2-thalia-en"
+  }
+},
+  "greeting": "Hi, I'm Marian. You made it here, and that's enough for now. We can take this one breath at a time."
+  }
+}
